@@ -1,0 +1,26 @@
+
+.face .data {
+   display: flex;
+   justify-content: center;
+}
+
+.cell {
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   border: 1px solid black;
+   width: 150px;
+   height: 150px;
+   font-size: 10vx;
+   transition: .3s ease-in;
+   cursor: pointer;
+}
+
+.cell:hover:not(.disabled) {
+   background-color: lightblue;
+}
+
+.disabled{
+   cursor: not-allowed;
+   background-color: gray;
+}
