@@ -58,6 +58,11 @@ export default class NewPicture {
         </tr>
         
         <table>
+
+        <dialog id="myDialog">
+          <p>Вы проиграли.</p>
+          <button type="button" id="closeDialog">Закрыть</button>
+        </dialog>
         `;
   }
 

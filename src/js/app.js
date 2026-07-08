@@ -18,17 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
     liner.push(document.getElementById(`line${i + 1}`));
   }
 
-  liner.forEach((elem) => {
-    elem.addEventListener("click", (event) => {
-      if (event.target.tagName == "IMG") {
-        const finer = document.getElementsByClassName("fine")[0];
-        finer.textContent = Number(finer.textContent) + 1;
-        window.widget.addPicture();
-        const badler = document.getElementsByClassName("mistake")[0];
-        badler.textContent = 0;
-      }
-    });
-  });
+  function obrabotchik(event) {
+    console.log('зашел в обработчик', event)
+    if (event.target.tagName == "IMG") {
+      const finer = document.getElementsByClassName("fine")[0];
+      finer.textContent = Number(finer.textContent) + 1;
+      window.widget.addPicture();
+      const badler = document.getElementsByClassName("mistake")[0];
+      badler.textContent = 0;
+    }
+  }
 
   //стираем все!!!!!!!!!!!!!!
   function lastic() {
@@ -44,18 +43,47 @@ document.addEventListener("DOMContentLoaded", () => {
     if (Number(badler.textContent) > lineOf) {
       lastic();
 
-      if (confirm("Вы проиграли...  Хотите начать заново?")) {
+      const dialog = document.getElementById('myDialog')
+      dialog.showModal()
+      document.getElementById('closeDialog').addEventListener('click', ()=>{
+        dialog.close()
+      })
+      clearInterval(timer);
+      document.querySelectorAll('.cell')[widget.position].innerHTML = '' 
+
+      /*if (confirm("Вы проиграли...  Хотите начать заново?")) {
         clearInterval(timer);
         timer = setInterval(() => {
           moved();
         }, interval);
       } else {
-        clearInterval(timer);
-      }
+               
+      } */      
     }
   }
 
+  liner.forEach((elem) => {
+    elem.addEventListener("click", (event) => {
+      if (event.target.tagName == "IMG") {
+        const finer = document.getElementsByClassName("fine")[0];
+        finer.textContent = Number(finer.textContent) + 1;
+
+        clearInterval(timer)
+        window.widget.addPicture();
+        timer = setInterval(() => {
+          moved();
+        }, interval)
+        
+        const badler = document.getElementsByClassName("mistake")[0];
+        badler.textContent = 0;
+      }
+    })
+  });
+
   timer = setInterval(() => {
     moved();
-  }, interval);
-});
+  }, interval)
+  
+})
+
+  
